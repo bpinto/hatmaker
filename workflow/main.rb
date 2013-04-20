@@ -33,7 +33,7 @@ def search(query, feedback)
   end
 end
 
-def install(json, feedback)
+def install(json, feedback, alfred_setting)
   workflow = Oj.load(json)
 
   File.open('/tmp/workflow.alfredworkflow', 'wb') do |saved_file|
@@ -42,7 +42,37 @@ def install(json, feedback)
     end
   end
 
+  setting = alfred_setting.load
+  setting[workflow.name] = workflow.version
+  alfred_setting.dump setting
+
   `open /tmp/workflow.alfredworkflow`
+end
+
+def outdated(feedback, alfred_setting)
+  setting = alfred_setting.load
+  setting.each do |s|
+    workflows = Hatmaker::Workflow.search(s.first)
+    new_release = workflows.find { |w| w.name == s.first && w.version.to_f > s.last.to_f }
+
+    if new_release
+      feedback.add_item({
+        :uid      => "#{new_release.author}_#{new_release.name}",
+        :title    => new_release.name,
+        :subtitle => "v#{new_release.version} by #{new_release.author}",
+        :arg      => Oj.dump(new_release)
+      })
+    end
+  end
+
+  if feedback.items.none?
+    feedback.add_item({
+      :uid      => 'nothingfound',
+      :title    => 'Outdated workflows',
+      :subtitle => 'No outdated workflows found',
+      :valid    => 'no'
+    })
+  end
 end
 
 Alfred.with_friendly_error do |alfred|
@@ -56,7 +86,9 @@ Alfred.with_friendly_error do |alfred|
   when /search/
     search arguments, feedback
   when /install/
-    install arguments, feedback
+    install arguments, feedback, alfred.setting
+  when /outdated/
+    outdated feedback, alfred.setting
   end
 
   puts feedback.to_xml

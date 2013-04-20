@@ -19,6 +19,17 @@
 		</array>
 		<key>2B7727E9-426C-4825-944C-B4A2BE25F5C4</key>
 		<array/>
+		<key>4FFC79AD-9487-4FDC-8FD9-4A5F39D99639</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2B7727E9-426C-4825-944C-B4A2BE25F5C4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Bruno Pinto</string>
@@ -30,6 +41,21 @@
 	<string>Hatmaker</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>4</integer>
+				<key>script</key>
+				<string>/usr/bin/ruby ./main.rb install "{query}"</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>2B7727E9-426C-4825-944C-B4A2BE25F5C4</string>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -60,17 +86,27 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
 				<key>escaping</key>
-				<integer>4</integer>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>outdated</string>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
 				<key>script</key>
-				<string>/usr/bin/ruby ./main.rb install "{query}"</string>
+				<string>/usr/bin/ruby ./main.rb outdated</string>
+				<key>title</key>
+				<string>Outdated workflows</string>
 				<key>type</key>
 				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>2B7727E9-426C-4825-944C-B4A2BE25F5C4</string>
+			<string>4FFC79AD-9487-4FDC-8FD9-4A5F39D99639</string>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -86,6 +122,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>10</real>
+		</dict>
+		<key>4FFC79AD-9487-4FDC-8FD9-4A5F39D99639</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>
