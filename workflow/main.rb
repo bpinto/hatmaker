@@ -52,6 +52,8 @@ end
 def outdated(feedback, alfred_setting)
   setting = alfred_setting.load
   setting.each do |s|
+    next unless s.first.is_a? String
+
     workflows = Hatmaker::Workflow.search(s.first)
     new_release = workflows.find { |w| w.name == s.first && w.version.to_f > s.last.to_f }
 

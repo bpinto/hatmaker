@@ -62,7 +62,7 @@
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
-				<integer>62</integer>
+				<integer>0</integer>
 				<key>keyword</key>
 				<string>install</string>
 				<key>runningsubtext</key>

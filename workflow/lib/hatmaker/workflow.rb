@@ -10,6 +10,8 @@ class Hatmaker::Workflow
   end
 
   def self.search(query)
+    query = Regexp.escape(query)
+
     @workflows ||= self.all
     @workflows.select { |w| w.name =~ /#{query}/i }
   end
