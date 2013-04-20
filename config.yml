@@ -2,6 +2,6 @@
 # path is the relative path to the workflow in the project root
 ---
 path: workflow
-domain: me.zhaowu
-id: alfred2-ruby-template
+domain: com.github.bpinto
+id: hatmaker
 
