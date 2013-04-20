@@ -1,5 +1,6 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "plist"
-gem "logging"
-gem "alfred-workflow", ">= 1.1.1"
+gem 'alfred-workflow', '>= 1.1.1'
+gem 'logging'
+gem 'oj'
+gem 'plist'

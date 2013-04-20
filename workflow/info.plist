@@ -10,24 +10,15 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>42D05639-3F0F-4760-8214-317167E4173D</string>
+				<string>2B7727E9-426C-4825-944C-B4A2BE25F5C4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 			</dict>
 		</array>
-		<key>BA17BE41-176A-4E9A-B958-A3F0BEA36829</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>42D05639-3F0F-4760-8214-317167E4173D</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-			</dict>
-		</array>
+		<key>2B7727E9-426C-4825-944C-B4A2BE25F5C4</key>
+		<array/>
 	</dict>
 	<key>createdby</key>
 	<string>Bruno Pinto</string>
@@ -42,43 +33,20 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<true/>
-				<key>output</key>
-				<integer>0</integer>
-				<key>removeextension</key>
-				<false/>
-				<key>sticky</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Ruby Script</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>42D05639-3F0F-4760-8214-317167E4173D</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
 				<integer>62</integer>
 				<key>keyword</key>
-				<string>test feedback</string>
+				<string>install</string>
 				<key>runningsubtext</key>
-				<string>working...</string>
+				<string>Searching...</string>
 				<key>script</key>
-				<string>/usr/bin/ruby ./main.rb {query}</string>
+				<string>/usr/bin/ruby ./main.rb search "{query}"</string>
 				<key>subtext</key>
-				<string>Ruby Based Workflow Template</string>
+				<string>Search and install a workflow</string>
 				<key>title</key>
-				<string>Test Alfred Feedback</string>
+				<string>Install a workflow</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -92,29 +60,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
 				<key>escaping</key>
-				<integer>63</integer>
-				<key>keyword</key>
-				<string>test rescue feedback</string>
-				<key>runningsubtext</key>
-				<string>...</string>
+				<integer>4</integer>
 				<key>script</key>
-				<string>/usr/bin/ruby ./main_with_rescue_feedback.rb {query}</string>
-				<key>subtext</key>
-				<string>Ruby Based Workflow Template</string>
-				<key>title</key>
-				<string>Test Alfred Rescue Feedback</string>
+				<string>/usr/bin/ruby ./main.rb install "{query}"</string>
 				<key>type</key>
 				<integer>0</integer>
-				<key>withspace</key>
-				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>BA17BE41-176A-4E9A-B958-A3F0BEA36829</string>
+			<string>2B7727E9-426C-4825-944C-B4A2BE25F5C4</string>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -124,17 +80,12 @@
 		<key>21557827-8003-42B7-A042-16D4C9278FEC</key>
 		<dict>
 			<key>ypos</key>
-			<real>250</real>
+			<real>10</real>
 		</dict>
-		<key>42D05639-3F0F-4760-8214-317167E4173D</key>
+		<key>2B7727E9-426C-4825-944C-B4A2BE25F5C4</key>
 		<dict>
 			<key>ypos</key>
-			<real>140</real>
-		</dict>
-		<key>BA17BE41-176A-4E9A-B958-A3F0BEA36829</key>
-		<dict>
-			<key>ypos</key>
-			<real>370</real>
+			<real>10</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>
