@@ -6,7 +6,7 @@ class Hatmaker::Workflow
     @description   = params['description']
     @download_link = params['download_link']
     @name          = params['name']
-    @version       = params['version']
+    @version       = params['version'].to_f
 
     @uid           = "#{@author}_#{@name}"
   end
@@ -15,21 +15,15 @@ class Hatmaker::Workflow
     Oj.dump(self)
   end
 
+  def self.find(workflow)
+    results = Hatmaker::Workflow.search workflow.name
+    results.find { |result| result.name == workflow.name && result.author == workflow.author }
+  end
+
   def self.search(query)
     query = Regexp.escape(query)
 
-    @workflows ||= self.all
-    @workflows.select { |w| w.name =~ /#{query}/i }
-  end
-
-  def self.find(workflow)
-    new_workflows = Hatmaker::Workflow.search(workflow.name)
-    new_workflows.find { |new_workflow| new_workflow == workflow }
-  end
-
-  private
-
-  def self.all
-    AlfredWorkflow.all
+    @workflows ||= AlfredWorkflow.all
+    @workflows.select { |workflow| workflow.name =~ /#{query}/i }
   end
 end

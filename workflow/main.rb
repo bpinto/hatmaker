@@ -16,16 +16,16 @@ require File.join(File.dirname(__FILE__), 'lib/hatmaker/workflow')
 def search(query, feedback)
   workflows = Hatmaker::Workflow.search(query)
   workflows.each do |workflow|
-    feedback.add_item({
+    feedback.add_item(
       :uid      => workflow.uid,
       :title    => workflow.name,
       :subtitle => workflow.description,
       :arg      => workflow.to_json
-    })
+    )
   end
 end
 
-def install(json, feedback, alfred_setting)
+def install(json, alfred_setting)
   workflow = Oj.load(json)
 
   File.open('/tmp/workflow.alfredworkflow', 'wb') do |saved_file|
@@ -41,38 +41,19 @@ def install(json, feedback, alfred_setting)
   `open /tmp/workflow.alfredworkflow`
 end
 
-def outdated(feedback, alfred_setting)
+def outdated(feedback)
   Hatmaker::Alfred::Workflow.all.each do |installed_workflow|
-    if installed_workflow.has_version?
-      new_release = Hatmaker::Workflow.find installed_workflow.name
+    if installed_workflow.outdated?
+      new_release = installed_workflow.last_release
 
-      if new_release.version > installed_workflow.version
-        feedback.add_item({
-          :uid      => new_release.uid,
-          :title    => new_release.name,
-          :subtitle => "v#{new_release.version} by #{new_release.author}",
-          :arg      => new_release.to_json
-        })
-      end
+      feedback.add_item(
+        :uid      => new_release.uid,
+        :title    => new_release.name,
+        :subtitle => "v#{new_release.version} by #{new_release.author}",
+        :arg      => new_release.to_json
+      )
     end
   end
-
-  #setting = alfred_setting.load
-  #setting.each do |s|
-    #next unless s.first.is_a? String
-
-    #workflows = Hatmaker::Workflow.search(s.first)
-    #new_release = workflows.find { |w| w.name == s.first && w.version.to_f > s.last.to_f }
-
-    #if new_release
-      #feedback.add_item({
-        #:uid      => new_release.uid,
-        #:title    => new_release.name,
-        #:subtitle => "v#{new_release.version} by #{new_release.author}",
-        #:arg      => new_release.to_json
-      #})
-    #end
-  #end
 end
 
 Alfred.with_friendly_error do |alfred|
@@ -86,17 +67,17 @@ Alfred.with_friendly_error do |alfred|
   when /search/
     search arguments, feedback
   when /install/
-    install arguments, feedback, alfred.setting
+    install arguments, alfred.setting
   when /outdated/
-    outdated feedback, alfred.setting
+    outdated feedback
   end
 
   if feedback.items.none?
-    feedback.add_item({
+    feedback.add_item(
       :uid      => 'nothingfound',
       :title    => arguments ? "No workflows found with '#{arguments}'" : 'All workflows are up to date!',
       :valid    => 'no'
-    })
+    )
   end
 
   puts feedback.to_xml

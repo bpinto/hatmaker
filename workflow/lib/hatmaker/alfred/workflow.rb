@@ -1,25 +1,50 @@
 class Hatmaker::Alfred::Workflow
-  PATH = File.join(File.dirname(__FILE__), '../../../../..')
+  attr_reader :author, :description, :name
 
-  def initialize(params)
-    @path = params['path']
-    @name = params['name']
+  def initialize(folder_name)
+    @folder_name  = folder_name
+
+    @author       = info['createdby']
+    @bundle_id    = info['bundleid']
+    @description  = info['description']
+    @disabled     = info['disabled']
+    @name         = info['name']
   end
 
-  def has_version?
-    @version
+  def last_release
+    @last_release ||= Hatmaker::Workflow.find self
+  end
+
+  def outdated?
+    last_release && last_release.version > version
+  end
+
+  def version
+    @version ||= (Hatmaker.setting[@name] || alleyoop['version']).to_f
   end
 
   def self.all
-    Dir.foreach(PATH).map do |folder|
-      next if folder =~ /^\./
-
-      Hatmaker::Alfred.info "Folder: #{folder}"
-      new 'path' => folder, 'info' => info(folder)
-    end
+    Dir.foreach(Hatmaker::Alfred::WORKFLOWS_PATH).map do |folder_name|
+      next if folder_name =~ /^\./ or folder_name == 'hatmaker'
+      new folder_name
+    end.compact
   end
 
-  def self.info(folder)
-    Plist::parse_xml(File.read("#{PATH}/#{folder}/info.plist"))
+  private
+
+  def alleyoop
+    @alleyoop ||= Oj.parse(File.read("#{path}/update.json")) rescue {}
+  end
+
+  def info
+    @info ||= Plist::parse_xml(File.read("#{path}/info.plist"))
+  end
+
+  def path
+    "#{Hatmaker::Alfred::WORKFLOWS_PATH}/#{@folder_name}"
+  end
+
+  def storage_path
+    "#{Hatmaker::Alfred::STORAGE_PATH}/#{@bundle_id}"
   end
 end
