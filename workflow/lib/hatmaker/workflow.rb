@@ -22,6 +22,11 @@ class Hatmaker::Workflow
     @workflows.select { |w| w.name =~ /#{query}/i }
   end
 
+  def self.find(workflow)
+    new_workflows = Hatmaker::Workflow.search(workflow.name)
+    new_workflows.find { |new_workflow| new_workflow == workflow }
+  end
+
   private
 
   def self.all
