@@ -9,26 +9,17 @@ require 'open-uri'
 
 require File.join(File.dirname(__FILE__), 'lib/alfred_workflow')
 require File.join(File.dirname(__FILE__), 'lib/hatmaker')
+require File.join(File.dirname(__FILE__), 'lib/hatmaker/alfred')
 require File.join(File.dirname(__FILE__), 'lib/hatmaker/workflow')
 
 def search(query, feedback)
   workflows = Hatmaker::Workflow.search(query)
-
-  if workflows.count > 0
-    workflows.each do |workflow|
-      feedback.add_item({
-        :uid      => "#{workflow.author}_#{workflow.name}",
-        :title    => workflow.name,
-        :subtitle => workflow.description,
-        :arg      => Oj.dump(workflow)
-      })
-    end
-  else
+  workflows.each do |workflow|
     feedback.add_item({
-      :uid      => 'nothingfound',
-      :title    => 'Workflows',
-      :subtitle => 'No workflows found with this query',
-      :valid    => 'no'
+      :uid      => workflow.uid,
+      :title    => workflow.name,
+      :subtitle => workflow.description,
+      :arg      => workflow.to_json
     })
   end
 end
@@ -59,21 +50,12 @@ def outdated(feedback, alfred_setting)
 
     if new_release
       feedback.add_item({
-        :uid      => "#{new_release.author}_#{new_release.name}",
+        :uid      => new_release.uid,
         :title    => new_release.name,
         :subtitle => "v#{new_release.version} by #{new_release.author}",
-        :arg      => Oj.dump(new_release)
+        :arg      => new_release.to_json
       })
     end
-  end
-
-  if feedback.items.none?
-    feedback.add_item({
-      :uid      => 'nothingfound',
-      :title    => 'Outdated workflows',
-      :subtitle => 'No outdated workflows found',
-      :valid    => 'no'
-    })
   end
 end
 
@@ -91,6 +73,14 @@ Alfred.with_friendly_error do |alfred|
     install arguments, feedback, alfred.setting
   when /outdated/
     outdated feedback, alfred.setting
+  end
+
+  if feedback.items.none?
+    feedback.add_item({
+      :uid      => 'nothingfound',
+      :title    => arguments ? "No workflows found with '#{arguments}'" : 'All workflows are up to date!',
+      :valid    => 'no'
+    })
   end
 
   puts feedback.to_xml
