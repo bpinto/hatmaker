@@ -19,7 +19,7 @@ def search(query, feedback)
       feedback.add_item({
         :uid      => "#{workflow.author}_#{workflow.name}",
         :title    => workflow.name,
-        :subtitle => "v#{workflow.version} by #{workflow.author}",
+        :subtitle => workflow.description,
         :arg      => Oj.dump(workflow)
       })
     end
