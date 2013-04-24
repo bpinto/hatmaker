@@ -5,6 +5,7 @@ class Hatmaker::Workflow
     @author        = params['author']
     @description   = params['description']
     @download_link = params['download_link']
+    @filename      = params['filename']
     @name          = params['name']
     @version       = params['version'].to_f
 
@@ -12,8 +13,8 @@ class Hatmaker::Workflow
   end
 
   def download(&block)
-    File.open('/tmp/workflow.alfredworkflow', 'wb') do |saved_file|
-      open(download_link, 'rb') do |read_file|
+    File.open("/tmp/#{@filename}", 'wb') do |saved_file|
+      open(@download_link, 'rb') do |read_file|
         saved_file.write(read_file.read)
       end
     end
@@ -23,10 +24,10 @@ class Hatmaker::Workflow
 
   def install(alfred_setting)
     setting = alfred_setting.load
-    setting[name] = version
+    setting[@name] = @version
     alfred_setting.dump setting
 
-    `open /tmp/workflow.alfredworkflow`
+    `open /tmp/#{@filename}`
   end
 
   def to_json
