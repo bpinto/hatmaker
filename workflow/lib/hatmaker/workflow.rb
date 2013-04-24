@@ -11,6 +11,24 @@ class Hatmaker::Workflow
     @uid           = "#{@author}_#{@name}"
   end
 
+  def download(&block)
+    File.open('/tmp/workflow.alfredworkflow', 'wb') do |saved_file|
+      open(download_link, 'rb') do |read_file|
+        saved_file.write(read_file.read)
+      end
+    end
+
+    yield self if block_given?
+  end
+
+  def install(alfred_setting)
+    setting = alfred_setting.load
+    setting[name] = version
+    alfred_setting.dump setting
+
+    `open /tmp/workflow.alfredworkflow`
+  end
+
   def to_json
     Oj.dump(self)
   end

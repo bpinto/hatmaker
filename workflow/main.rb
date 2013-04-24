@@ -27,18 +27,7 @@ end
 
 def install(json, alfred_setting)
   workflow = Oj.load(json)
-
-  File.open('/tmp/workflow.alfredworkflow', 'wb') do |saved_file|
-    open(workflow.download_link, 'rb') do |read_file|
-      saved_file.write(read_file.read)
-    end
-  end
-
-  setting = alfred_setting.load
-  setting[workflow.name] = workflow.version
-  alfred_setting.dump setting
-
-  `open /tmp/workflow.alfredworkflow`
+  workflow.download { |workflow| workflow.install(alfred_setting) }
 end
 
 def outdated(feedback)
