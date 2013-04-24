@@ -24,7 +24,10 @@ class Hatmaker::Alfred::Workflow
   end
 
   def storage_path
-    "#{Hatmaker::Alfred::STORAGE_PATH}/#{@bundle_id}"
+    folder = "#{Hatmaker::Alfred::STORAGE_PATH}/#{@bundle_id}"
+    FileUtils.mkdir_p(folder) unless File.exist? folder
+
+    folder
   end
 
   def version
