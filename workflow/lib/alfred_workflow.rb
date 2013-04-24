@@ -14,6 +14,7 @@ class AlfredWorkflow
       'description'   => data['workflow-description-small'],
       'download_link' => data['workflow-download-link'],
       'filename'      => 'workflow.alfredworkflow',
+      'homepage'      => data['workflow-release-page'],
       'name'          => data['workflow-name'],
       'version'       => data['workflow-version']
     }

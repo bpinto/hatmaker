@@ -6,6 +6,7 @@ class Hatmaker::Workflow
     @description   = params['description']
     @download_link = params['download_link']
     @filename      = params['filename']
+    @homepage      = params['homepage']
     @name          = params['name']
     @version       = params['version'].to_f
 
