@@ -31,6 +31,9 @@ outdated
 ### Update a workflow
 List outdated workflows (```outdated```) and then select the outdated workflow
 
+### Open workflow homepage
+Hold ```option``` key when installing or listing outdated workflows.
+
 ## Credits
 
 Everyone at the alfred community.
