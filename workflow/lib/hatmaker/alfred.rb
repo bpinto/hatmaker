@@ -3,11 +3,11 @@ class Hatmaker::Alfred
   WORKFLOWS_PATH = File.join(File.dirname(__FILE__), '../../../..')
 
   def self.info(msg)
-    logger.info msg
+    logger.info msg.to_s
   end
 
   def self.error(msg)
-    logger.error msg
+    logger.error msg.to_s
   end
 
   private
