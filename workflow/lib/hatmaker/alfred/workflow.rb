@@ -34,7 +34,7 @@ class Hatmaker::Alfred::Workflow
   def self.all
     Dir.foreach(Hatmaker::Alfred::WORKFLOWS_PATH).map do |folder_name|
       next if folder_name =~ /^\./ or folder_name == 'hatmaker'
-      new folder_name
+      new folder_name rescue nil
     end.compact
   end
 
