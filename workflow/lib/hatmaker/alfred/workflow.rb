@@ -1,5 +1,5 @@
 class Hatmaker::Alfred::Workflow
-  attr_reader :author, :description, :name
+  attr_reader :author, :bundle_id, :description, :name
 
   def initialize(folder_name)
     @folder_name  = folder_name
@@ -17,6 +17,14 @@ class Hatmaker::Alfred::Workflow
 
   def outdated?
     last_release && last_release.version > version
+  end
+
+  def path
+    "#{Hatmaker::Alfred::WORKFLOWS_PATH}/#{@folder_name}"
+  end
+
+  def storage_path
+    "#{Hatmaker::Alfred::STORAGE_PATH}/#{@bundle_id}"
   end
 
   def version
@@ -38,13 +46,5 @@ class Hatmaker::Alfred::Workflow
 
   def info
     @info ||= Plist::parse_xml(File.read("#{path}/info.plist"))
-  end
-
-  def path
-    "#{Hatmaker::Alfred::WORKFLOWS_PATH}/#{@folder_name}"
-  end
-
-  def storage_path
-    "#{Hatmaker::Alfred::STORAGE_PATH}/#{@bundle_id}"
   end
 end

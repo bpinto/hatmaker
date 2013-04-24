@@ -8,10 +8,14 @@ module Hatmaker
   private
 
   def self.path
-    "#{Hatmaker::Alfred::WORKFLOWS_PATH}/#{BUNDLE_ID}"
+    workflow.path
   end
 
   def self.storage_path
-    "#{Hatmaker::Alfred::STORAGE_PATH}/#{BUNDLE_ID}"
+    workflow.storage_path
+  end
+
+  def self.workflow
+    @workflow ||= Hatmaker::Alfred::Workflow.all.find { |workflow| workflow.bundle_id == BUNDLE_ID }
   end
 end
