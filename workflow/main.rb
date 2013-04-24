@@ -11,6 +11,7 @@ require File.join(File.dirname(__FILE__), 'lib/alfred_workflow')
 require File.join(File.dirname(__FILE__), 'lib/hatmaker')
 require File.join(File.dirname(__FILE__), 'lib/hatmaker/alfred')
 require File.join(File.dirname(__FILE__), 'lib/hatmaker/alfred/workflow')
+require File.join(File.dirname(__FILE__), 'lib/hatmaker/alfred/yaml_end')
 require File.join(File.dirname(__FILE__), 'lib/hatmaker/workflow')
 
 def search(query, feedback)
@@ -25,9 +26,9 @@ def search(query, feedback)
   end
 end
 
-def install(json, alfred_setting)
+def install(json)
   workflow = Oj.load(json)
-  workflow.download { |workflow| workflow.install(alfred_setting) }
+  workflow.download { |workflow| workflow.install }
 end
 
 def outdated(feedback)
@@ -56,7 +57,7 @@ Alfred.with_friendly_error do |alfred|
   when /search/
     search arguments, feedback
   when /install/
-    install arguments, alfred.setting
+    install arguments
   when /outdated/
     outdated feedback
   end

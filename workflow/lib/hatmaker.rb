@@ -2,7 +2,7 @@ module Hatmaker
   BUNDLE_ID = 'com.github.bpinto.hatmaker'
 
   def self.setting
-    YAML::load(File.read("#{storage_path}/setting.yaml")) rescue {}
+    Hatmaker::Alfred::YamlEnd.load("#{storage_path}/setting.yaml")
   end
 
   private

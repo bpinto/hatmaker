@@ -22,11 +22,8 @@ class Hatmaker::Workflow
     yield self if block_given?
   end
 
-  def install(alfred_setting)
-    setting = alfred_setting.load
-    setting[@name] = @version
-    alfred_setting.dump setting
-
+  def install
+    Hatmaker.setting[@name] = @version
     `open /tmp/#{@filename}`
   end
 
