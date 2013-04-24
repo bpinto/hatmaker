@@ -45,7 +45,7 @@
 			<key>config</key>
 			<dict>
 				<key>escaping</key>
-				<integer>4</integer>
+				<integer>68</integer>
 				<key>script</key>
 				<string>/usr/bin/ruby ./main.rb install "{query}"</string>
 				<key>type</key>
@@ -89,7 +89,7 @@
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>escaping</key>
-				<integer>127</integer>
+				<integer>0</integer>
 				<key>keyword</key>
 				<string>outdated</string>
 				<key>runningsubtext</key>
