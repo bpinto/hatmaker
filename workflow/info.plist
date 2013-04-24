@@ -88,7 +88,8 @@
 	<key>createdby</key>
 	<string>Bruno Pinto</string>
 	<key>description</key>
-	<string>Manage alfred extension</string>
+	<string>Manage Alfred workflows.
+Manage Alfred workflows.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -109,7 +110,11 @@
 				<key>script</key>
 				<string>/usr/bin/ruby ./main.rb search "{query}"</string>
 				<key>subtext</key>
-				<string>Search and install a workflow</string>
+				<string>Search for and install a workflow ; + Option to open workflow's home page
+
+Search for and install a workflow ; + Option to open workflow's home page
+
+Search for and install a workflow ; + Option to open workflow's home page</string>
 				<key>title</key>
 				<string>Install a workflow</string>
 				<key>type</key>
