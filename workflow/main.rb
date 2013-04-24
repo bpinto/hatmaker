@@ -26,9 +26,13 @@ def search(query, feedback)
   end
 end
 
-def install(json)
-  workflow = Oj.load(json)
-  workflow.download { |workflow| workflow.install }
+def install(json, feedback)
+  begin
+    workflow = Oj.load(json)
+    workflow.download { |workflow| workflow.install }
+  rescue OpenURI::HTTPError => ex
+    puts "Error while downloading #{workflow.name}, please try again later."
+  end
 end
 
 def outdated(feedback)
@@ -57,7 +61,7 @@ Alfred.with_friendly_error do |alfred|
   when /search/
     search arguments, feedback
   when /install/
-    install arguments
+    install arguments, feedback
   when /outdated/
     outdated feedback
   end
@@ -70,6 +74,6 @@ Alfred.with_friendly_error do |alfred|
     )
   end
 
-  puts feedback.to_xml
+  puts feedback.to_xml if command != 'install'
 end
 

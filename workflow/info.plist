@@ -18,7 +18,16 @@
 			</dict>
 		</array>
 		<key>2B7727E9-426C-4825-944C-B4A2BE25F5C4</key>
-		<array/>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1A75DEFB-3A66-426E-92DE-76F1F6107336</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>4FFC79AD-9487-4FDC-8FD9-4A5F39D99639</key>
 		<array>
 			<dict>
@@ -86,6 +95,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Hatmaker</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>1A75DEFB-3A66-426E-92DE-76F1F6107336</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>escaping</key>
@@ -113,6 +145,11 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>1A75DEFB-3A66-426E-92DE-76F1F6107336</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
 		<key>21557827-8003-42B7-A042-16D4C9278FEC</key>
 		<dict>
 			<key>ypos</key>

@@ -14,9 +14,7 @@ class Hatmaker::Workflow
 
   def download(&block)
     File.open("/tmp/#{@filename}", 'wb') do |saved_file|
-      open(@download_link, 'rb') do |read_file|
-        saved_file.write(read_file.read)
-      end
+      open(@download_link, 'rb') { |file| saved_file.write file.read }
     end
 
     yield self if block_given?
