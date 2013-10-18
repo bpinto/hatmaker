@@ -1,5 +1,5 @@
 class AlfredWorkflow
-  URL = 'https://raw.github.com/hzlzh/AlfredWorkflow.com/master/workflow-api.json'
+  URL = 'https://raw.github.com/hzlzh/AlfredWorkflow.com/master/workflow_api.json'
 
   def self.all
     json = open(URL).read
@@ -10,13 +10,13 @@ class AlfredWorkflow
 
   def self.parse_workflow(data)
     {
-      'author'        => data['workflow-author-name'],
-      'description'   => data['workflow-description-small'],
-      'download_link' => data['workflow-download-link'],
+      'author'        => data['workflow_author_name'],
+      'description'   => data['workflow_description_small'],
+      'download_link' => data['workflow_download_link'],
       'filename'      => 'workflow.alfredworkflow',
-      'homepage'      => data['workflow-release-page'],
-      'name'          => data['workflow-name'],
-      'version'       => data['workflow-version']
+      'homepage'      => data['workflow_release_page'],
+      'name'          => data['workflow_name'],
+      'version'       => data['workflow_version']
     }
   end
 end
